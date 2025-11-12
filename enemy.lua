@@ -1,6 +1,6 @@
 local Enemy = {}
 Enemy.__index = Enemy
-------------------------
+------------------------this comment is here cause i pushed it after mergin unrelated histories from git and my local repo
 
 local function pentagonPoints(x, y, size)
     local points = {}
