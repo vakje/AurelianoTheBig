@@ -1,6 +1,6 @@
 local Camera = {}
 Camera.__index = Camera
---for scaling window on normal size to see it is blurry a bit..
+--for scaling window 
 function Camera.new(virtualWidth, virtualHeight, windowWidth, windowHeight)
     local self = setmetatable({}, Camera)
     self.vw, self.vh = virtualWidth, virtualHeight
