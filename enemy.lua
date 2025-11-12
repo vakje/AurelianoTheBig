@@ -1,6 +1,21 @@
 local Enemy = {}
 Enemy.__index = Enemy
+------------------------
 
+local function pentagonPoints(x, y, size)
+    local points = {}
+    for i = 0, 4 do
+        local angle = (2 * math.pi / 5) * i - math.pi/2  
+        table.insert(points, x + math.cos(angle) * size)
+        table.insert(points, y + math.sin(angle) * size)
+    end
+    return points
+end
+
+
+
+
+-----------------------
 function Enemy.new(x, y)
     local self = setmetatable({}, Enemy)
     self.x, self.y = x, y
@@ -50,8 +65,12 @@ end
 
 function Enemy:draw()
     love.graphics.setColor(1, 0, 0)
-    love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+    local centerX = self.x + self.width/2
+    local centerY = self.y + self.height/2
+    local radius = math.min(self.width, self.height)/2
+    love.graphics.polygon("fill", pentagonPoints(centerX, centerY, radius))
     love.graphics.setColor(1, 1, 1)
 end
+
 
 return Enemy

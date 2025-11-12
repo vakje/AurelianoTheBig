@@ -7,13 +7,19 @@ local player
 local enemies = {}
 local coins = {}
 
+--------visual-----------
 local cam
 local VIRTUAL_WIDTH, VIRTUAL_HEIGHT = 640, 480
 
+---------gameplay--------
 local score = 1
 local highScore = 0
 local playerDead = false
 local lastEnemyScore = 0
+
+-----background--------
+local background
+
 ----------------------------------
 local function spawnCoin()
     local coinSize = 16  -- same as coin  
@@ -39,6 +45,7 @@ end
 --------------------------------
 
 function love.load()
+    background = love.graphics.newImage("assets/preview.png") 
     love.graphics.setDefaultFilter("nearest", "nearest")
 
     local windowWidth, windowHeight = love.graphics.getDimensions()
@@ -96,6 +103,10 @@ end
 
 function love.draw()
     cam:start()
+
+    local scaleX = VIRTUAL_WIDTH / background:getWidth()
+    local scaleY = VIRTUAL_HEIGHT / background:getHeight()
+    love.graphics.draw(background, 0, 0, 0, scaleX, scaleY)
     
     player:draw()
     for _, enemy in ipairs(enemies) do enemy:draw() end
